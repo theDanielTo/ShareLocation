@@ -1,13 +1,22 @@
+import axios from 'axios';
+
 const form = document.querySelector('form')!;
 const addressInput = document.getElementById('address')! as HTMLInputElement;
 
 const GOOGLE_API_KEY = 'AIzaSyApCMsMiH2TBO2pZ6nRiHhCSzycQfEK3m8';
+const API_URL_PREFIX = 'https://maps.googleapis.com/maps/api/geocode/json';
 
 function searchAddressHandler(event: Event) {
   event.preventDefault();
   const enteredAddress = addressInput.value;
 
-  // send this to Google's API
+  axios.get(API_URL_PREFIX + `?address=${encodeURI(enteredAddress)}&key=${GOOGLE_API_KEY}`)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 form.addEventListener('submit', searchAddressHandler);
