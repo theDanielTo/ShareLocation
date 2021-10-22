@@ -6,8 +6,6 @@ const addressInput = document.getElementById('address')! as HTMLInputElement;
 const GOOGLE_API_KEY = 'AIzaSyApCMsMiH2TBO2pZ6nRiHhCSzycQfEK3m8';
 const API_URL_PREFIX = 'https://maps.googleapis.com/maps/api/geocode/json';
 
-declare var google: any;
-
 type GoogleGeocodingResponse = {
   results: { geometry: { location: { lat: number, lng: number } } }[];
   status: 'OK' | 'ZERO_RESULTS';
