@@ -20,9 +20,22 @@ function searchAddressHandler(event: Event) {
       API_URL_PREFIX + `?address=${encodeURI(enteredAddress)}&key=${GOOGLE_API_KEY}`
     )
     .then(res => {
-      const coordinates = res.data.results[0].geometry.location;
+      if (res.data.status !== 'OK') {
+        throw new Error('Could not fetch location!');
+      }
+      const coordinates = res.data.results[0].geometry.location; // returns lat, lng
+      const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+        center: coordinates,
+        zoom: 16,
+      });
+
+      new google.maps.Marker({
+        position: coordinates,
+        map: map,
+      });
     })
     .catch(err => {
+      alert(err.message);
       console.log(err);
     });
 }
