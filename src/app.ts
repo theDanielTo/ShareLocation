@@ -41,3 +41,5 @@ function searchAddressHandler(event: Event) {
 }
 
 form.addEventListener('submit', searchAddressHandler);
+
+console.log('github test');
